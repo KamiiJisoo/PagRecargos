@@ -992,97 +992,101 @@ export default function ControlHorasExtras() {
 
           {/* Tabla de días (solo semana actual) */}
           <section className="bg-white rounded-lg shadow p-6">
-            <div className="grid grid-cols-7 gap-4 font-bold mb-2 text-center text-black">
-              <div className="text-left">DÍA</div>
-              <div>ENTRADA 1</div>
-              <div>SALIDA 1</div>
-              <div>ENTRADA 2</div>
-              <div>SALIDA 2</div>
-              <div>TOTAL</div>
-              <div>FESTIVOS</div>
-            </div>
-            {diasSemanaActual.map((fechaDate, idx) => {
-              const fechaStr = format(fechaDate, "yyyy-MM-dd")
-              const nombreDia = format(fechaDate, "EEEE", { locale: es }).toUpperCase()
-              const fechaFormateada = format(fechaDate, "dd/MM/yyyy")
-              const esDelMes = isSameMonth(fechaDate, fechaInicio)
-              const dia = diasMes[fechaStr] || { entrada1: "", salida1: "", entrada2: "", salida2: "", total: "", esFestivo: false }
-              const rowBg = idx % 2 === 0 ? "bg-white" : "bg-[#F8FAFC]"
-              return (
-                <div
-                  key={fechaStr}
-                  className={cn(
-                    "grid grid-cols-7 gap-4 mb-0 items-center rounded-lg border-b border-gray-200 py-2",
-                    rowBg,
-                    !esDelMes && "bg-gray-100 opacity-60"
-                  )}
-                >
-                  <div>
-                    <div className="font-bold text-black text-sm">{nombreDia}</div>
-                    <div className="text-gray-500 text-xs">{fechaFormateada}</div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Input
-                      type="time"
-                      value={dia.entrada1}
-                      onChange={(e) => handleCambioHora(fechaStr, "entrada1", e.target.value)}
-                      readOnly={!esDelMes}
-                      className={cn(
-                        "text-center rounded-md px-2 py-1 text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-bomberored-700 w-full",
-                        !esDelMes ? "bg-[#FEF2F2] text-gray-400" : "bg-white"
-                      )}
-                    />
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Input
-                      type="time"
-                      value={dia.salida1}
-                      onChange={(e) => handleCambioHora(fechaStr, "salida1", e.target.value)}
-                      readOnly={!esDelMes}
-                      className={cn(
-                        "text-center rounded-md px-2 py-1 text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-bomberored-700 w-full",
-                        !esDelMes ? "bg-[#FEF2F2] text-gray-400" : "bg-white"
-                      )}
-                    />
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Input
-                      type="time"
-                      value={dia.entrada2}
-                      onChange={(e) => handleCambioHora(fechaStr, "entrada2", e.target.value)}
-                      readOnly={!esDelMes}
-                      className={cn(
-                        "text-center rounded-md px-2 py-1 text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-bomberored-700 w-full",
-                        !esDelMes ? "bg-[#FEF2F2] text-gray-400" : "bg-white"
-                      )}
-                    />
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Input
-                      type="time"
-                      value={dia.salida2}
-                      onChange={(e) => handleCambioHora(fechaStr, "salida2", e.target.value)}
-                      readOnly={!esDelMes}
-                      className={cn(
-                        "text-center rounded-md px-2 py-1 text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-bomberored-700 w-full",
-                        !esDelMes ? "bg-[#FEF2F2] text-gray-400" : "bg-white"
-                      )}
-                    />
-                  </div>
-                  <div className="text-center font-bold text-blue-900 text-base">
-                    {dia.total || "0:00"}
-                  </div>
-                  <div className="flex justify-center">
-                    {dia.esFestivo && (
-                      <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#F44E4E] text-white font-bold text-sm">
-                        <AlertCircle className="w-4 h-4" />
-                        Domingo/Festivo
-                      </span>
-                    )}
-                  </div>
+            <div className="w-full overflow-x-auto">
+              <div className="min-w-[800px]">
+                <div className="grid grid-cols-7 gap-4 font-bold mb-2 text-center text-black">
+                  <div className="text-left">DÍA</div>
+                  <div>ENTRADA 1</div>
+                  <div>SALIDA 1</div>
+                  <div>ENTRADA 2</div>
+                  <div>SALIDA 2</div>
+                  <div>TOTAL</div>
+                  <div>FESTIVOS</div>
                 </div>
-              )
-            })}
+                {diasSemanaActual.map((fechaDate, idx) => {
+                  const fechaStr = format(fechaDate, "yyyy-MM-dd")
+                  const nombreDia = format(fechaDate, "EEEE", { locale: es }).toUpperCase()
+                  const fechaFormateada = format(fechaDate, "dd/MM/yyyy")
+                  const esDelMes = isSameMonth(fechaDate, fechaInicio)
+                  const dia = diasMes[fechaStr] || { entrada1: "", salida1: "", entrada2: "", salida2: "", total: "", esFestivo: false }
+                  const rowBg = idx % 2 === 0 ? "bg-white" : "bg-[#F8FAFC]"
+                  return (
+                    <div
+                      key={fechaStr}
+                      className={cn(
+                        "grid grid-cols-7 gap-4 mb-0 items-center rounded-lg border-b border-gray-200 py-2",
+                        rowBg,
+                        !esDelMes && "bg-gray-100 opacity-60"
+                      )}
+                    >
+                      <div>
+                        <div className="font-bold text-black text-sm">{nombreDia}</div>
+                        <div className="text-gray-500 text-xs">{fechaFormateada}</div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Input
+                          type="time"
+                          value={dia.entrada1}
+                          onChange={(e) => handleCambioHora(fechaStr, "entrada1", e.target.value)}
+                          readOnly={!esDelMes}
+                          className={cn(
+                            "text-center rounded-md px-2 py-1 text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-bomberored-700 w-full",
+                            !esDelMes ? "bg-[#FEF2F2] text-gray-400" : "bg-white"
+                          )}
+                        />
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Input
+                          type="time"
+                          value={dia.salida1}
+                          onChange={(e) => handleCambioHora(fechaStr, "salida1", e.target.value)}
+                          readOnly={!esDelMes}
+                          className={cn(
+                            "text-center rounded-md px-2 py-1 text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-bomberored-700 w-full",
+                            !esDelMes ? "bg-[#FEF2F2] text-gray-400" : "bg-white"
+                          )}
+                        />
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Input
+                          type="time"
+                          value={dia.entrada2}
+                          onChange={(e) => handleCambioHora(fechaStr, "entrada2", e.target.value)}
+                          readOnly={!esDelMes}
+                          className={cn(
+                            "text-center rounded-md px-2 py-1 text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-bomberored-700 w-full",
+                            !esDelMes ? "bg-[#FEF2F2] text-gray-400" : "bg-white"
+                          )}
+                        />
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Input
+                          type="time"
+                          value={dia.salida2}
+                          onChange={(e) => handleCambioHora(fechaStr, "salida2", e.target.value)}
+                          readOnly={!esDelMes}
+                          className={cn(
+                            "text-center rounded-md px-2 py-1 text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-bomberored-700 w-full",
+                            !esDelMes ? "bg-[#FEF2F2] text-gray-400" : "bg-white"
+                          )}
+                        />
+                      </div>
+                      <div className="text-center font-bold text-blue-900 text-base">
+                        {dia.total || "0:00"}
+                      </div>
+                      <div className="flex justify-center">
+                        {dia.esFestivo && (
+                          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#F44E4E] text-white font-bold text-sm">
+                            <AlertCircle className="w-4 h-4" />
+                            Domingo/Festivo
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
           </section>
         </>
       )}

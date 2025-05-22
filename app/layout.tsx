@@ -18,10 +18,12 @@ export default function RootLayout({
         <header className="bg-[var(--primary)] text-white py-4 shadow-md sticky top-0 z-50">
           <div className="container mx-auto flex items-center justify-between px-2 md:px-0">
             <div className="flex items-center gap-3">
-              <div className="flex items-center bg-white rounded-lg px-4 py-2" style={{height: '112px'}}>
-                <img src="/LogoFinal.png" alt="Logo Bomberos" className="h-20 w-auto object-contain mr-4" />
-                <div className="flex flex-col">
-                  <span className="text-lg font-bold text-gray-800 mt-2">Cálculo de recargos y Horas Extras</span>
+              <div className="flex flex-col md:flex-row items-center bg-white rounded-lg px-4 py-2" style={{height: 'auto'}}>
+                <img src="/LogoFinal.png" alt="Logo Bomberos" className="h-20 w-auto object-contain md:mr-4 mb-2 md:mb-0" />
+                <div className="flex flex-col items-center md:items-start">
+                  <span className="text-lg font-bold text-gray-800 mt-2 md:mt-0 text-center md:text-left">
+                    Cálculo de recargos y Horas Extras
+                  </span>
                 </div>
               </div>
             </div>
